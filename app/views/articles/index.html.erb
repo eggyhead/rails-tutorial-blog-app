@@ -1,19 +1,30 @@
-<h1>Articles</h1>
-
-Our blog has:
-<%= Article.public_count %> public articles 
-<%= Article.private_count %> private articles 
-<%= Article.archived_count %> archived articles
-
-
-<ul>
+<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
   <% @articles.each do |article| %>
-    <% unless article.archived? %>
-      <li>
-        <%= link_to article.title, article %>
-      </li>
-    <% end %>
+    <div class="bg-white overflow-hidden shadow rounded-lg border">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          <%= link_to article.title, article, class: "hover:text-indigo-600" %>
+        </h3>
+        <p class="mt-2 max-w-2xl text-sm text-gray-500">
+          <%= truncate(article.body, length: 150) %>
+        </p>
+      </div>
+      <div class="bg-gray-50 px-4 py-4 sm:px-6 border-t border-gray-200">
+        <div class="text-sm">
+          <span class="text-gray-500">Posted: </span>
+          <time class="font-medium text-gray-900"><%= article.created_at.strftime("%B %d, %Y") %></time>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
 
-<%= link_to "New Article", new_article_path %>
+<% if @articles.empty? %>
+  <div class="text-center py-10">
+    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+    </svg>
+    <h3 class="mt-2 text-sm font-medium text-gray-900">No articles</h3>
+    <p class="mt-1 text-sm text-gray-500">Get started by creating a new article.</p>
+  </div>
+<% end %>
