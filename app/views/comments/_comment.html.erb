@@ -1,0 +1,17 @@
+<p>
+  <strong>Commenter:</strong>
+  <%= comment.commenter %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= comment.body %>
+</p>
+
+<p>
+  <%= button_to "Destroy Comment", 
+                [comment.article, comment],
+                method: :delete,
+                onclick: "return confirm('Are you sure?')",
+                class: "btn btn-link p-0 m-0 align-baseline" %>
+</p>
