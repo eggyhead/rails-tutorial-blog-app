@@ -22,7 +22,6 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    logger.info "TESTING EDIT"
     @article = Article.find(params[:id])
   end
 
@@ -37,7 +36,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    logger.info "TESTING DESTROY"
     @article = Article.find(params[:id])
     @article.destroy
 

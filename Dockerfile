@@ -34,11 +34,13 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential \
     libsqlite3-dev \
     nodejs \
+    npm \
     yarn \
     git \
-    libyaml-dev\
-    pkg-config && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    libyaml-dev \
+    pkg-config \
+    && npm install -g yarn \
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
